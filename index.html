@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBMG 360 Digital | Diseño Web, Sistemas y Edición de Video</title>
+    <meta name="description" content="EBMG 360 Digital - Servicios de diseño web, creación de páginas web, sistemas web y edición de videos profesional.">
+    <meta property="og:title" content="EBMG 360 Digital | Tu éxito digital, nuestra misión 360°">
+    <meta property="og:description" content="Diseño Web, Sistemas y Edición de Video Profesional para impulsar tu negocio al siguiente nivel.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ebmg360digital.com">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%237B2FFF' rx='15' width='100' height='100'/><text x='50' y='62' font-size='28' font-weight='bold' fill='white' text-anchor='middle' font-family='Arial'>EBMG</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0A0A0F;
+            --bg-secondary: #12121A;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --accent-blue: #0066FF;
+            --accent-purple: #7B2FFF;
+            --gradient: linear-gradient(135deg, #0066FF, #7B2FFF);
+            --gradient-rev: linear-gradient(135deg, #7B2FFF, #0066FF);
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --success: #25D366;
+            --glow: 0 0 20px rgba(0, 102, 255, 0.3);
+            --glow-purple: 0 0 20px rgba(123, 47, 255, 0.3);
+        }
+        .light-mode {
+            --bg-primary: #F5F7FA;
+            --bg-secondary: #FFFFFF;
+            --bg-card: rgba(0, 0, 0, 0.04);
+            --text-primary: #1A1A2E;
+            --text-secondary: #555555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.4s, color 0.4s;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; }
+        section { padding: 100px 5%; }
+        .container { max-width: 1200px; margin: 0 auto; width: 100%; }
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn {
+            display: inline-block; padding: 14px 32px; border-radius: 50px;
+            font-weight: 600; font-size: 0.95rem; cursor: pointer; border: none;
+            position: relative; overflow: hidden; transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-primary {
+            background: var(--gradient); color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0, 102, 255, 0.5); }
+        .btn-outline {
+            background: transparent; color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .light-mode .btn-outline { border-color: rgba(0,0,0,0.2); }
+        .btn-outline:hover {
+            border-color: var(--accent-blue); background: rgba(0, 102, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        .btn .ripple {
+            position: absolute; border-radius: 50%; background: rgba(255,255,255,0.4);
+            transform: scale(0); animation: rippleAnim 0.6s linear; pointer-events: none;
+        }
+        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 15px; }
+        .section-header p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+        .glass-card {
+            background: var(--bg-card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; transition: all 0.4s ease;
+        }
+        .light-mode .glass-card { border-color: rgba(0,0,0,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .glass-card:hover {
+            border-color: rgba(0, 102, 255, 0.3); box-shadow: var(--glow); transform: translateY(-5px);
+        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ══════════ NAVBAR ══════════ */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 18px 5%; display: flex; align-items: center;
+            justify-content: space-between; transition: all 0.4s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.92); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); padding: 12px 5%;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+        .light-mode .navbar.scrolled { background: rgba(255,255,255,0.92); }
+        .nav-logo { display: flex; align-items: center; gap: 8px; font-size: 1.5rem; font-weight: 800; }
+        .nav-logo span { color: var(--accent-blue); }
+        .nav-links { display: flex; align-items: center; gap: 30px; }
+        .nav-links a { font-weight: 500; font-size: 0.95rem; position: relative; transition: color 0.3s; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 2px; background: var(--gradient); transition: width 0.3s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--accent-blue); }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .theme-toggle {
+            background: none; border: none; color: var(--text-primary);
+            font-size: 1.3rem; cursor: pointer; padding: 8px; border-radius: 50%; transition: all 0.3s;
+        }
+        .theme-toggle:hover { background: var(--bg-card); }
+        .nav-social { display: flex; gap: 12px; }
+        .nav-social a { font-size: 1.1rem; color: var(--text-secondary); transition: color 0.3s, transform 0.3s; }
+        .nav-social a:hover { color: var(--accent-blue); transform: scale(1.2); }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px; cursor: pointer;
+            background: none; border: none; padding: 5px; z-index: 1001;
+        }
+        .hamburger span { width: 28px; height: 3px; background: var(--text-primary); border-radius: 3px; transition: all 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        /* ══════════ HERO ══════════ */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden; padding-top: 100px;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(0,102,255,0.15), rgba(123,47,255,0.15)); z-index: 0;
+        }
+        .hero-bg::before {
+            content: ''; position: absolute; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,102,255,0.2), transparent 70%);
+            top: -100px; right: -100px; animation: float 8s ease-in-out infinite;
+        }
+        .hero-bg::after {
+            content: ''; position: absolute; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(123,47,255,0.2), transparent 70%);
+            bottom: -100px; left: -100px; animation: float 8s ease-in-out infinite reverse;
+        }
+        @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -30px); } }
+        #particles-canvas { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px; font-size: 0.9rem; margin-bottom: 25px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,102,255,0.3); } 50% { box-shadow: 0 0 0 10px rgba(0,102,255,0); } }
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; }
+        .typewriter { border-right: 3px solid var(--accent-blue); padding-right: 5px; }
+        .hero .subtitle { font-size: clamp(0.9rem, 2vw, 1.15rem); color: var(--text-secondary); margin-bottom: 10px; font-weight: 500; }
+        .hero .subtitle span { color: var(--accent-blue); }
+        .hero .desc { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 35px; line-height: 1.7; }
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        /* ══════════ SERVICES ══════════ */
+        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        .service-card { padding: 35px 30px; position: relative; overflow: hidden; }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 3px; background: var(--gradient);
+            transform: scaleX(0); transition: transform 0.4s;
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon-wrap {
+            width: 75px; height: 75px; border-radius: 18px; background: var(--gradient);
+            display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+            position: relative; overflow: hidden;
+        }
+        .service-icon-wrap::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent); border-radius: 18px;
+        }
+        .service-icon-wrap i { font-size: 1.8rem; color: #fff; position: relative; z-index: 1; }
+        .service-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; }
+        .service-card ul { margin-bottom: 25px; }
+        .service-card ul li {
+            color: var(--text-secondary); padding: 5px 0; font-size: 0.92rem;
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .service-card ul li i.fa-check-circle { color: var(--accent-blue); font-size: 0.85rem; margin-top: 3px; flex-shrink: 0; }
+        .service-card .btn { width: 100%; text-align: center; padding: 12px; font-size: 0.9rem; }
+
+        /* ══════════ PORTFOLIO ══════════ */
+        .portfolio-filters {
+            display: flex; justify-content: center; gap: 10px;
+            margin-bottom: 40px; flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 24px; border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1); background: transparent;
+            color: var(--text-secondary); font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem; cursor: pointer; transition: all 0.3s;
+        }
+        .light-mode .filter-btn { border-color: rgba(0,0,0,0.1); }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient); color: #fff; border-color: transparent;
+        }
+        .portfolio-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+        }
+        .portfolio-item {
+            border-radius: 20px; overflow: hidden; position: relative;
+            height: 400px; cursor: pointer;
+        }
+        .portfolio-item .p-bg {
+            width: 100%; height: 100%; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.5s;
+        }
+        .portfolio-item:hover .p-bg { transform: scale(1.05); }
+        .portfolio-overlay {
+            position: absolute; inset: 0; z-index: 5;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.05) 75%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 28px; opacity: 0; transition: opacity 0.5s ease;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-overlay h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+        .portfolio-overlay p { font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-bottom: 12px; line-height: 1.4; }
+        .portfolio-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .portfolio-tags span {
+            padding: 3px 12px; font-size: 0.72rem; border-radius: 20px;
+            background: rgba(0,102,255,0.2); color: var(--accent-blue); font-weight: 500;
+        }
+
+        /* Portfolio Device Mockups */
+        .portfolio-mockup {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 2; padding: 25px;
+        }
+        .portfolio-item .p-bg::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            z-index: 0; pointer-events: none;
+        }
+        .portfolio-item .p-bg::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+            z-index: 1; pointer-events: none;
+        }
+        /* Browser mockup */
+        .device-browser {
+            width: 88%; max-width: 350px;
+            background: rgba(15, 15, 25, 0.92);
+            border-radius: 10px; overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.12);
+            transform: perspective(1000px) rotateY(-3deg) rotateX(2deg);
+            transition: transform 0.6s ease;
+        }
+        .portfolio-item:hover .device-browser {
+            transform: perspective(1000px) rotateY(0) rotateX(0) scale(1.03);
+        }
+        .browser-header {
+            height: 30px; background: rgba(255,255,255,0.07);
+            display: flex; align-items: center; padding: 0 11px; gap: 5px;
+        }
+        .browser-header .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .browser-header .dot.r { background: #FF5F56; }
+        .browser-header .dot.y { background: #FFBD2E; }
+        .browser-header .dot.g { background: #27C93F; }
+        .browser-header .url-bar {
+            flex: 1; height: 16px; background: rgba(255,255,255,0.05);
+            border-radius: 8px; margin-left: 10px;
+            display: flex; align-items: center; padding: 0 8px; gap: 5px;
+        }
+        .browser-header .url-bar i { font-size: 6px; color: rgba(255,255,255,0.25); }
+        .browser-header .url-bar span {
+            font-size: 7.5px; color: rgba(255,255,255,0.3); font-family: 'Inter', sans-serif;
+        }
+        .browser-screen { width: 100%; overflow: hidden; line-height: 0; }
+        .browser-screen img { width: 100%; height: auto; display: block; min-height: 170px; object-fit: cover; }
+
+        /* Phone mockup */
+        .device-phone {
+            background: rgba(15, 15, 25, 0.95);
+            border-radius: 22px; padding: 5px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.18);
+            transition: transform 0.6s ease;
+        }
+        .portfolio-item:hover .device-phone { transform: perspective(800px) rotateY(0) scale(1.03) !important; }
+        .phone-notch {
+            width: 45%; height: 14px; background: rgba(0,0,0,0.6);
+            border-radius: 0 0 10px 10px; margin: 0 auto -3px;
+            position: relative; z-index: 2;
+        }
+        .phone-screen { border-radius: 17px; overflow: hidden; line-height: 0; }
+        .phone-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .phone-indicator {
+            width: 32%; height: 3px; background: rgba(255,255,255,0.2);
+            border-radius: 2px; margin: 5px auto 2px;
+        }
+
+        /* Single phone layout */
+        .mockup-phone-single { display: flex; align-items: center; justify-content: center; }
+        .mockup-phone-single .device-phone {
+            width: 155px; transform: perspective(800px) rotateY(5deg);
+        }
+        .mockup-phone-single .phone-screen { aspect-ratio: 9/18; }
+
+        /* Dual device layout */
+        .mockup-dual {
+            display: flex; align-items: flex-end; justify-content: center;
+            gap: 14px; padding-bottom: 15px;
+        }
+        .mockup-dual .device-browser { width: 62%; max-width: 240px; transform: perspective(800px) rotateY(-2deg); }
+        .mockup-dual .device-phone { width: 75px; transform: perspective(800px) rotateY(5deg); }
+        .mockup-dual .phone-screen { aspect-ratio: 9/18; }
+
+        /* Triple phone layout */
+        .mockup-triple-phone {
+            display: flex; align-items: center; justify-content: center;
+            position: relative; width: 100%; height: 100%;
+        }
+        .mockup-triple-phone .device-phone { position: absolute; }
+        .mockup-triple-phone .device-phone.ph-left {
+            width: 108px; left: 8%; z-index: 1;
+            transform: perspective(800px) rotateY(20deg) scale(0.88); opacity: 0.75;
+        }
+        .mockup-triple-phone .device-phone.ph-center {
+            width: 145px; z-index: 3;
+            transform: perspective(800px) rotateY(0);
+        }
+        .mockup-triple-phone .device-phone.ph-right {
+            width: 108px; right: 8%; z-index: 1;
+            transform: perspective(800px) rotateY(-20deg) scale(0.88); opacity: 0.75;
+        }
+        .mockup-triple-phone .phone-screen { aspect-ratio: 9/17; }
+        .portfolio-item:hover .mockup-triple-phone .ph-left { transform: perspective(800px) rotateY(12deg) scale(0.92) !important; opacity: 0.85; }
+        .portfolio-item:hover .mockup-triple-phone .ph-center { transform: perspective(800px) rotateY(0) scale(1.04) !important; }
+        .portfolio-item:hover .mockup-triple-phone .ph-right { transform: perspective(800px) rotateY(-12deg) scale(0.92) !important; opacity: 0.85; }
+
+        /* Cinema frame for video */
+        .device-cinema {
+            width: 88%; max-width: 350px;
+            background: rgba(10, 10, 18, 0.95);
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.6s ease;
+        }
+        .portfolio-item:hover .device-cinema { transform: perspective(1000px) rotateX(0) scale(1.03); }
+        .cinema-screen { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; line-height: 0; }
+        .cinema-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cinema-letterbox {
+            position: absolute; left: 0; right: 0; height: 13%;
+            background: rgba(0,0,0,0.85); z-index: 2;
+        }
+        .cinema-letterbox.top { top: 0; }
+        .cinema-letterbox.bottom { bottom: 0; }
+        .cinema-play-center {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); z-index: 3;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cinema-play-center i { color: #fff; font-size: 16px; margin-left: 3px; }
+        .cinema-controls {
+            display: flex; align-items: center; gap: 8px;
+            padding: 7px 12px; background: rgba(255,255,255,0.03);
+        }
+        .cinema-controls .play-icon {
+            width: 22px; height: 22px; border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 8px; color: rgba(255,255,255,0.5);
+        }
+        .cinema-controls .progress {
+            flex: 1; height: 3px; background: rgba(255,255,255,0.1);
+            border-radius: 2px; overflow: hidden;
+        }
+        .cinema-controls .progress span {
+            display: block; height: 100%; width: 65%;
+            background: var(--accent-blue); border-radius: 2px;
+        }
+        .cinema-controls .time-code {
+            font-size: 7.5px; color: rgba(255,255,255,0.35);
+            font-family: 'Inter', monospace;
+        }
+
+        /* Result badges */
+        .result-badge {
+            position: absolute; z-index: 5;
+            background: rgba(10, 10, 20, 0.72);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 7px 15px; border-radius: 25px;
+            font-size: 0.72rem; font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            color: #fff; white-space: nowrap;
+            display: flex; align-items: center; gap: 6px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+            animation: badgeFloat 4s ease-in-out infinite;
+        }
+        .result-badge i { font-size: 0.65rem; }
+        .result-badge.rb-green { color: #4ADE80; border-color: rgba(74,222,128,0.25); }
+        .result-badge.rb-blue { color: #60A5FA; border-color: rgba(96,165,250,0.25); }
+        .result-badge.rb-purple { color: #C084FC; border-color: rgba(192,132,252,0.25); }
+        .result-badge.rb-orange { color: #FB923C; border-color: rgba(251,146,60,0.25); }
+        .result-badge.rb-pink { color: #F472B6; border-color: rgba(244,114,182,0.25); }
+        .result-badge.rb-cyan { color: #22D3EE; border-color: rgba(34,211,238,0.25); }
+        .result-badge.pos-tr { top: 18px; right: 18px; }
+        .result-badge.pos-tl { top: 18px; left: 18px; }
+        .result-badge.pos-bl { bottom: 55px; left: 18px; animation-delay: 1.5s; }
+        .result-badge.pos-br { bottom: 55px; right: 18px; animation-delay: 0.7s; }
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ══════════ WHY US ══════════ */
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .why-card { text-align: center; padding: 40px 25px; }
+        .why-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .why-card .counter { font-size: 2.8rem; font-weight: 900; margin-bottom: 8px; }
+        .why-card h4 { font-size: 1rem; color: var(--text-secondary); font-weight: 500; }
+
+        /* ══════════ ABOUT ══════════ */
+        .about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: center; }
+        .about-img-wrap { text-align: center; }
+        .about-img-border {
+            display: inline-block; padding: 5px; border-radius: 50%;
+            background: var(--gradient); animation: borderRotate 4s linear infinite;
+            box-shadow: 0 0 40px rgba(0,102,255,0.2), 0 0 80px rgba(123,47,255,0.1);
+        }
+        @keyframes borderRotate { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+        .about-img-border img {
+            width: 280px; height: 280px; border-radius: 50%;
+            object-fit: cover; display: block; border: 5px solid var(--bg-primary);
+        }
+        .about-content h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 5px; }
+        .about-content .role { color: var(--accent-blue); font-weight: 600; margin-bottom: 20px; font-size: 1.05rem; }
+        .about-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 30px; font-size: 0.95rem; }
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        .skill-item label {
+            display: flex; justify-content: space-between;
+            font-size: 0.85rem; margin-bottom: 6px; font-weight: 500;
+        }
+        .skill-bar { height: 8px; background: rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; }
+        .light-mode .skill-bar { background: rgba(0,0,0,0.08); }
+        .skill-bar .fill { height: 100%; background: var(--gradient); border-radius: 10px; width: 0; transition: width 1.5s ease; }
+        .about-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        /* ══════════ PRICING ══════════ */
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; align-items: stretch;
+        }
+        .price-card { padding: 40px 30px; text-align: center; position: relative; }
+        .price-card.featured {
+            border: 2px solid; border-radius: 20px; border-image: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.2); transform: scale(1.03);
+        }
+        .price-card.featured::before {
+            content: ''; position: absolute; inset: -2px; border-radius: 20px;
+            padding: 2px; background: var(--gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+        }
+        .popular-badge {
+            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: var(--gradient); color: #fff; padding: 5px 25px;
+            border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+        }
+        .price-card .plan-icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .price-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+        .price-card .price { font-size: 3rem; font-weight: 900; margin-bottom: 25px; }
+        .price-card .price span { font-size: 1rem; font-weight: 400; color: var(--text-secondary); }
+        .price-card ul { margin-bottom: 30px; text-align: left; }
+        .price-card ul li {
+            padding: 8px 0; font-size: 0.9rem; color: var(--text-secondary);
+            display: flex; align-items: flex-start; gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .light-mode .price-card ul li { border-bottom-color: rgba(0,0,0,0.04); }
+        .price-card ul li i { color: var(--accent-blue); margin-top: 3px; }
+        .price-card .btn { width: 100%; }
+        .pricing-custom {
+            text-align: center; margin-top: 40px; padding: 25px;
+            border-radius: 15px; background: var(--bg-card);
+        }
+        .pricing-custom p { color: var(--text-secondary); font-size: 1rem; }
+        .pricing-custom a { color: var(--accent-blue); font-weight: 600; }
+        .video-plans-title { text-align: center; margin: 60px 0 30px; }
+        .video-plans-title h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+
+        /* ══════════ CONTACT ══════════ */
+        .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
+        .contact-form .glass-card { padding: 40px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 8px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 14px 18px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
+            color: var(--text-primary); font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem; transition: all 0.3s; outline: none;
+        }
+        .light-mode .form-group input, .light-mode .form-group select,
+        .light-mode .form-group textarea { border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.03); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.15);
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-group select option { background: var(--bg-secondary); color: var(--text-primary); }
+        .form-group .error-msg { color: #FF3D71; font-size: 0.8rem; margin-top: 5px; display: none; }
+        .form-group.error input, .form-group.error select, .form-group.error textarea { border-color: #FF3D71; }
+        .form-group.error .error-msg { display: block; }
+        .contact-info-items { display: flex; flex-direction: column; gap: 20px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; padding: 20px; }
+        .contact-item-icon {
+            width: 50px; height: 50px; border-radius: 12px; background: var(--gradient);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
+        }
+        .contact-item-text h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
+        .contact-item-text p, .contact-item-text a { font-size: 0.88rem; color: var(--text-secondary); transition: color 0.3s; }
+        .contact-item-text a:hover { color: var(--accent-blue); }
+
+        /* ══════════ FOOTER ══════════ */
+        footer {
+            background: var(--bg-secondary); padding: 70px 5% 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .light-mode footer { border-top-color: rgba(0,0,0,0.06); }
+        .footer-grid {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 40px; margin-bottom: 50px;
+        }
+        .footer-col h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; position: relative; }
+        .footer-col h4::after {
+            content: ''; position: absolute; bottom: -8px; left: 0;
+            width: 40px; height: 3px; background: var(--gradient); border-radius: 3px;
+        }
+        .footer-col p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a {
+            color: var(--text-secondary); font-size: 0.9rem;
+            transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .footer-col ul li a:hover { color: var(--accent-blue); transform: translateX(5px); }
+        .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+        .footer-social a {
+            width: 42px; height: 42px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-secondary); font-size: 1.1rem; transition: all 0.3s;
+        }
+        .footer-social a:hover { background: var(--gradient); color: #fff; border-color: transparent; transform: translateY(-3px); }
+        .footer-bottom {
+            text-align: center; padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.85rem; color: var(--text-secondary);
+        }
+        .light-mode .footer-bottom { border-top-color: rgba(0,0,0,0.06); }
+
+        /* ══════════ FLOATING ══════════ */
+        .whatsapp-float {
+            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+            border-radius: 50%; background: #25D366; display: flex;
+            align-items: center; justify-content: center; color: #fff;
+            font-size: 1.8rem; z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            animation: wpPulse 2s infinite; transition: transform 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float .tooltip {
+            position: absolute; right: 70px; background: #fff; color: #333;
+            padding: 8px 15px; border-radius: 10px; font-size: 0.85rem;
+            white-space: nowrap; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        .whatsapp-float:hover .tooltip { opacity: 1; }
+        @keyframes wpPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+        .scroll-top {
+            position: fixed; bottom: 100px; right: 30px; width: 45px; height: 45px;
+            border-radius: 12px; background: var(--gradient);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.1rem; z-index: 998; cursor: pointer; border: none;
+            opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s;
+        }
+        .scroll-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .scroll-top:hover { transform: translateY(-3px); }
+
+        /* ══════════ MOBILE MENU ══════════ */
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100vh; background: rgba(10, 10, 15, 0.97);
+            z-index: 999; flex-direction: column; align-items: center;
+            justify-content: center; gap: 30px; backdrop-filter: blur(20px);
+        }
+        .light-mode .mobile-menu { background: rgba(255,255,255,0.97); }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a { font-size: 1.4rem; font-weight: 600; transition: color 0.3s; }
+        .mobile-menu a:hover { color: var(--accent-blue); }
+        .mobile-menu .nav-social { margin-top: 20px; gap: 20px; }
+        .mobile-menu .nav-social a { font-size: 1.5rem; }
+
+        /* ══════════ SUCCESS MODAL ══════════ */
+        .success-modal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            z-index: 2000; align-items: center; justify-content: center;
+        }
+        .success-modal.show { display: flex; }
+        .success-modal-content {
+            background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 50px; text-align: center;
+            max-width: 400px; animation: modalPop 0.4s ease;
+        }
+        @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .success-modal-content .check-icon {
+            width: 70px; height: 70px; border-radius: 50%; background: var(--gradient);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; margin: 0 auto 20px;
+        }
+        .success-modal-content h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .success-modal-content p { color: var(--text-secondary); margin-bottom: 25px; }
+
+        /* ══════════ RESPONSIVE ══════════ */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-img-wrap { margin-bottom: 20px; }
+            .skills-grid { max-width: 500px; margin-left: auto; margin-right: auto; }
+            .about-buttons { justify-content: center; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .nav-social, .nav-cta-desktop { display: none; }
+            .hamburger { display: flex; }
+            section { padding: 70px 5%; }
+            .services-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .price-card.featured { transform: scale(1); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr 1fr; }
+            .portfolio-item { height: 350px; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero-buttons { flex-direction: column; }
+            .hero-buttons .btn { width: 100%; text-align: center; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item { height: 380px; }
+            .about-img-border img { width: 220px; height: 220px; }
+            .mockup-triple-phone .device-phone.ph-left { left: 3%; }
+            .mockup-triple-phone .device-phone.ph-right { right: 3%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══════════ NAVBAR ══════════ -->
+    <nav class="navbar" id="navbar">
+        <a href="#inicio" class="nav-logo">
+            <strong>EBMG</strong> <span>360 Digital</span>
+        </a>
+        <div class="nav-links">
+            <a href="#inicio" class="active">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#portafolio">Portafolio</a>
+            <a href="#sobre-mi">Sobre Mí</a>
+            <a href="#precios">Precios</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+        <div class="nav-right">
+            <div class="nav-social">
+                <a href="https://instagram.com/ezequielbenjamin1202" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com/@ezequielmedina630" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://t.me/+584129126548" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+            <a href="https://wa.me/584129126548?text=Hola%20EBMG%20360%20Digital%2C%20quiero%20cotizar%20un%20servicio" target="_blank" class="btn btn-primary nav-cta nav-cta-desktop" style="padding:10px 24px;font-size:0.85rem;">Cotiza Gratis</a>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#sobre-mi">Sobre Mí</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+        <a href="https://wa.me/584129126548?text=Hola%20EBMG%20360%20Digital%2C%20quiero%20cotizar%20un%20servicio" target="_blank" class="btn btn-primary">Cotiza Gratis</a>
+        <div class="nav-social">
+            <a href="https://instagram.com/ezequielbenjamin1202" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com/@ezequielmedina630" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+            <a href="https://t.me/+584129126548" target="_blank" rel="noopener"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://wa.me/584129126548" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg"></div>
+        <canvas id="particles-canvas"></canvas>
+        <div class="container hero-content">
+            <div class="hero-badge">🔥 +50 proyectos completados</div>
+            <h1><span class="typewriter" id="typewriter"></span></h1>
+            <p class="subtitle">
+                <span>Diseño Web</span> | <span>Páginas Web</span> | <span>Sistemas</span> | <span>Edición de Video</span>
+            </p>
+            <p class="desc">
+                En <strong>EBMG 360 Digital</strong> creamos experiencias digitales que impulsan tu negocio al siguiente nivel.
+            </p>
+            <div class="hero-buttons">
+                <a href="#servicios" class="btn btn-primary">Ver Servicios</a>
+                <a href="#portafolio" class="btn btn-outline">Ver Portafolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ SERVICES ══════════ -->
+    <section id="servicios">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Nuestros <span class="gradient-text">Servicios</span></h2>
+                <p>Soluciones digitales completas para llevar tu negocio al siguiente nivel</p>
+            </div>
+            <div class="services-grid">
+                <div class="glass-card service-card reveal">
+                    <div class="service-icon-wrap"><i class="fas fa-palette"></i></div>
+                    <h3>Diseño Web</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Diseño UI/UX profesional y creativo</li>
+                        <li><i class="fas fa-check-circle"></i> Diseños 100% responsivos y modernos</li>
+                        <li><i class="fas fa-check-circle"></i> Maquetado en Figma y Adobe XD</li>
+                        <li><i class="fas fa-check-circle"></i> Landing pages de alto impacto visual</li>
+                        <li><i class="fas fa-check-circle"></i> Identidad visual digital</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Diseño%20Web" target="_blank" class="btn btn-primary">Solicitar Diseño</a>
+                </div>
+                <div class="glass-card service-card reveal">
+                    <div class="service-icon-wrap"><i class="fas fa-code"></i></div>
+                    <h3>Creación de Páginas Web</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Páginas web corporativas y profesionales</li>
+                        <li><i class="fas fa-check-circle"></i> Tiendas online / E-commerce completas</li>
+                        <li><i class="fas fa-check-circle"></i> Portafolios digitales personalizados</li>
+                        <li><i class="fas fa-check-circle"></i> Landing pages de ventas (Sales pages)</li>
+                        <li><i class="fas fa-check-circle"></i> Blogs y sitios de contenido</li>
+                        <li><i class="fas fa-check-circle"></i> Optimización SEO incluida</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20quiero%20mi%20página%20web" target="_blank" class="btn btn-primary">Quiero mi Web</a>
+                </div>
+                <div class="glass-card service-card reveal">
+                    <div class="service-icon-wrap"><i class="fas fa-cogs"></i></div>
+                    <h3>Sistemas Web</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Sistemas de gestión empresarial</li>
+                        <li><i class="fas fa-check-circle"></i> Control de inventario y ventas</li>
+                        <li><i class="fas fa-check-circle"></i> Paneles administrativos (dashboards)</li>
+                        <li><i class="fas fa-check-circle"></i> Aplicaciones web a medida</li>
+                        <li><i class="fas fa-check-circle"></i> Integración con bases de datos y APIs</li>
+                        <li><i class="fas fa-check-circle"></i> Reportes y estadísticas en tiempo real</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20quiero%20cotizar%20un%20sistema%20web" target="_blank" class="btn btn-primary">Cotizar Sistema</a>
+                </div>
+                <div class="glass-card service-card reveal">
+                    <div class="service-icon-wrap"><i class="fas fa-film"></i></div>
+                    <h3>Edición de Videos Profesional</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Edición para YouTube y redes sociales</li>
+                        <li><i class="fas fa-check-circle"></i> Videos promocionales y publicitarios</li>
+                        <li><i class="fas fa-check-circle"></i> Edición de Reels, TikToks y Shorts virales</li>
+                        <li><i class="fas fa-check-circle"></i> Intros, outros y animaciones personalizadas</li>
+                        <li><i class="fas fa-check-circle"></i> Corrección de color y efectos visuales</li>
+                        <li><i class="fas fa-check-circle"></i> Subtítulos y motion graphics</li>
+                        <li><i class="fas fa-check-circle"></i> Videos corporativos y presentaciones</li>
+                        <li><i class="fas fa-check-circle"></i> Edición con IA para mayor productividad</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20quiero%20cotizar%20edición%20de%20video" target="_blank" class="btn btn-primary">Cotizar Video</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ WHY US ══════════ -->
+    <section id="por-que" style="background:var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>¿Por qué elegir <span class="gradient-text">EBMG 360 Digital</span>?</h2>
+                <p>Resultados reales que respaldan nuestro trabajo</p>
+            </div>
+            <div class="why-grid">
+                <div class="glass-card why-card reveal">
+                    <span class="why-icon">🚀</span>
+                    <div class="counter" data-target="50">0</div>
+                    <h4>Proyectos Completados</h4>
+                </div>
+                <div class="glass-card why-card reveal">
+                    <span class="why-icon">😊</span>
+                    <div class="counter" data-target="40">0</div>
+                    <h4>Clientes Satisfechos</h4>
+                </div>
+                <div class="glass-card why-card reveal">
+                    <span class="why-icon">⏰</span>
+                    <div class="counter" data-target="5">0</div>
+                    <h4>Años de Experiencia</h4>
+                </div>
+                <div class="glass-card why-card reveal">
+                    <span class="why-icon">⭐</span>
+                    <div class="counter" data-target="100">0</div>
+                    <h4>% Satisfacción Garantizada</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ ABOUT ══════════ -->
+    <section id="sobre-mi">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-img-wrap reveal">
+                    <div class="about-img-border">
+                        <!-- REEMPLAZAR con foto real de TikTok @ezequielmedina630 
+                             Guardar imagen como perfil.jpg y cambiar src="perfil.jpg" -->
+                        <img src="https://placehold.co/300x300/7B2FFF/FFFFFF?text=EBM" alt="Ezequiel Benjamin Medina - Fundador de EBMG 360 Digital">
+                    </div>
+                </div>
+                <div class="about-content reveal">
+                    <h2>Hola, soy <span class="gradient-text">Ezequiel Benjamin Medina</span></h2>
+                    <p class="role">Fundador de EBMG 360 Digital</p>
+                    <p>Soy desarrollador web, diseñador digital, editor de video y apasionado por la tecnología y la inteligencia artificial. Fundé EBMG 360 Digital con la misión de ayudar a personas y negocios a crecer en el mundo digital. Mi objetivo es brindarte soluciones completas: desde el diseño de tu página web hasta la edición de videos profesionales que impulsen tu marca.</p>
+                    <div class="skills-grid" id="skillsGrid">
+                        <div class="skill-item">
+                            <label>HTML / CSS <span>95%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="95"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <label>JavaScript <span>90%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="90"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <label>Python <span>85%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="85"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <label>React <span>80%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="80"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <label>Herramientas IA <span>88%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="88"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <label>Diseño UI/UX <span>85%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="85"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <label>Edición de Video <span>90%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="90"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <label>SEO <span>80%</span></label>
+                            <div class="skill-bar"><div class="fill" data-width="80"></div></div>
+                        </div>
+                    </div>
+                    <div class="about-buttons">
+                        <a href="#contacto" class="btn btn-primary">Contáctame</a>
+                        <a href="#" class="btn btn-outline"><i class="fas fa-download" style="margin-right:8px;"></i>Descargar CV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ PORTFOLIO ══════════ -->
+    <section id="portafolio" style="background:var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Nuestros <span class="gradient-text">Proyectos</span></h2>
+                <p>Resultados reales que hablan por sí solos</p>
+            </div>
+            <div class="portfolio-filters reveal">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="web">Páginas Web</button>
+                <button class="filter-btn" data-filter="sistema">Sistemas</button>
+                <button class="filter-btn" data-filter="diseno">Diseño</button>
+                <button class="filter-btn" data-filter="video">Videos</button>
+            </div>
+            <div class="portfolio-grid" id="portfolioGrid">
+
+                <!-- 1. E-commerce ModaStyle -->
+                <div class="portfolio-item reveal" data-category="web">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#FF6B6B 0%,#FF8E53 50%,#FEC163 100%);">
+                        <div class="portfolio-mockup">
+                            <div class="device-browser">
+                                <div class="browser-header">
+                                    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                                    <div class="url-bar"><i class="fas fa-lock"></i><span>www.modastyle.com</span></div>
+                                </div>
+                                <div class="browser-screen">
+                                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=500&fit=crop&q=80" alt="E-commerce ModaStyle - Tienda online de moda" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="result-badge rb-green pos-tr"><i class="fas fa-arrow-up"></i> +200% Ventas</div>
+                            <div class="result-badge rb-blue pos-bl"><i class="fas fa-eye"></i> 15K Visitas/mes</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>E-commerce ModaStyle</h4>
+                        <p>Tienda online de moda con pasarela de pagos y catálogo de +500 productos</p>
+                        <div class="portfolio-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                    </div>
+                </div>
+
+                <!-- 2. Sistema de Inventario ProStock -->
+                <div class="portfolio-item reveal" data-category="sistema">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#0052D4 0%,#4364F7 50%,#6FB1FC 100%);">
+                        <div class="portfolio-mockup">
+                            <div class="device-browser">
+                                <div class="browser-header">
+                                    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                                    <div class="url-bar"><i class="fas fa-lock"></i><span>app.prostock.com/dashboard</span></div>
+                                </div>
+                                <div class="browser-screen">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&q=80" alt="Sistema de Inventario ProStock - Dashboard" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="result-badge rb-cyan pos-tr"><i class="fas fa-boxes-stacked"></i> +500 Productos</div>
+                            <div class="result-badge rb-purple pos-bl"><i class="fas fa-chart-line"></i> Datos en Tiempo Real</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>Sistema de Inventario ProStock</h4>
+                        <p>Sistema completo de control de inventarios, ventas y reportes automáticos</p>
+                        <div class="portfolio-tags"><span>Python</span><span>MySQL</span></div>
+                    </div>
+                </div>
+
+                <!-- 3. Landing Page FitGym -->
+                <div class="portfolio-item reveal" data-category="web">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#11998E 0%,#38EF7D 100%);">
+                        <div class="portfolio-mockup mockup-phone-single">
+                            <div class="device-phone">
+                                <div class="phone-notch"></div>
+                                <div class="phone-screen">
+                                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=800&fit=crop&q=80" alt="Landing Page FitGym - Vista móvil" loading="lazy">
+                                </div>
+                                <div class="phone-indicator"></div>
+                            </div>
+                            <div class="result-badge rb-green pos-tr"><i class="fas fa-arrow-up"></i> +150% Conversiones</div>
+                            <div class="result-badge rb-orange pos-bl"><i class="fas fa-users"></i> +300 Leads/mes</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>Landing Page FitGym</h4>
+                        <p>Landing page responsive con +150% de aumento en conversiones</p>
+                        <div class="portfolio-tags"><span>React</span><span>Tailwind</span></div>
+                    </div>
+                </div>
+
+                <!-- 4. Dashboard Analytics360 -->
+                <div class="portfolio-item reveal" data-category="sistema">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#7B2FFF 0%,#C86DD7 50%,#FF6FD8 100%);">
+                        <div class="portfolio-mockup">
+                            <div class="device-browser">
+                                <div class="browser-header">
+                                    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                                    <div class="url-bar"><i class="fas fa-lock"></i><span>analytics360.app/dashboard</span></div>
+                                </div>
+                                <div class="browser-screen">
+                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80" alt="Dashboard Analytics360 - Analítica en tiempo real" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="result-badge rb-purple pos-tr"><i class="fas fa-chart-pie"></i> KPIs en Vivo</div>
+                            <div class="result-badge rb-green pos-bl"><i class="fas fa-bolt"></i> +40% Eficiencia</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>Dashboard Analytics360</h4>
+                        <p>Panel de análisis en tiempo real con gráficos interactivos y reportes</p>
+                        <div class="portfolio-tags"><span>JavaScript</span><span>Chart.js</span></div>
+                    </div>
+                </div>
+
+                <!-- 5. Portafolio Fotográfico ArtLens -->
+                <div class="portfolio-item reveal" data-category="diseno">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#FF3D71 0%,#FF9F43 50%,#FFC371 100%);">
+                        <div class="portfolio-mockup">
+                            <div class="device-browser">
+                                <div class="browser-header">
+                                    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                                    <div class="url-bar"><i class="fas fa-lock"></i><span>www.artlens.photography</span></div>
+                                </div>
+                                <div class="browser-screen">
+                                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&h=500&fit=crop&q=80" alt="Portafolio Fotográfico ArtLens" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="result-badge rb-orange pos-tr"><i class="fas fa-camera"></i> Diseño Premium</div>
+                            <div class="result-badge rb-blue pos-bl"><i class="fas fa-eye"></i> 5K Visitas/mes</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>Portafolio Fotográfico ArtLens</h4>
+                        <p>Galería minimalista y elegante para fotógrafo profesional</p>
+                        <div class="portfolio-tags"><span>HTML</span><span>CSS</span></div>
+                    </div>
+                </div>
+
+                <!-- 6. Plataforma LearnHub -->
+                <div class="portfolio-item reveal" data-category="web">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#5B247A 0%,#6C5CE7 50%,#A29BFE 100%);">
+                        <div class="portfolio-mockup mockup-dual">
+                            <div class="device-browser">
+                                <div class="browser-header">
+                                    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                                    <div class="url-bar"><i class="fas fa-lock"></i><span>learnhub.com</span></div>
+                                </div>
+                                <div class="browser-screen">
+                                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=600&h=400&fit=crop&q=80" alt="LearnHub Desktop" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="device-phone" style="transform:perspective(800px) rotateY(5deg);">
+                                <div class="phone-notch"></div>
+                                <div class="phone-screen">
+                                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=700&fit=crop&q=80" alt="LearnHub Mobile" loading="lazy">
+                                </div>
+                                <div class="phone-indicator"></div>
+                            </div>
+                            <div class="result-badge rb-purple pos-tr"><i class="fas fa-graduation-cap"></i> +1000 Estudiantes</div>
+                            <div class="result-badge rb-green pos-bl"><i class="fas fa-star"></i> 4.9/5 Rating</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>Plataforma de Cursos LearnHub</h4>
+                        <p>Plataforma educativa con membresías, certificados y +1000 estudiantes activos</p>
+                        <div class="portfolio-tags"><span>React</span><span>Node.js</span></div>
+                    </div>
+                </div>
+
+                <!-- 7. Video Promocional RestaurantX -->
+                <div class="portfolio-item reveal" data-category="video">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#F2994A 0%,#F2C94C 50%,#E17055 100%);">
+                        <div class="portfolio-mockup">
+                            <div class="device-cinema">
+                                <div class="cinema-screen">
+                                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=450&fit=crop&q=80" alt="Video Promocional RestaurantX" loading="lazy">
+                                    <div class="cinema-letterbox top"></div>
+                                    <div class="cinema-letterbox bottom"></div>
+                                    <div class="cinema-play-center"><i class="fas fa-play"></i></div>
+                                </div>
+                                <div class="cinema-controls">
+                                    <div class="play-icon"><i class="fas fa-pause"></i></div>
+                                    <div class="progress"><span></span></div>
+                                    <div class="time-code">02:45 / 03:30</div>
+                                </div>
+                            </div>
+                            <div class="result-badge rb-orange pos-tr"><i class="fas fa-play-circle"></i> +50K Reproducciones</div>
+                            <div class="result-badge rb-green pos-bl"><i class="fas fa-arrow-up"></i> +80% Reservas</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>Video Promocional RestaurantX</h4>
+                        <p>Video publicitario que generó +50K reproducciones y +80% en reservas</p>
+                        <div class="portfolio-tags"><span>Premiere Pro</span><span>After Effects</span></div>
+                    </div>
+                </div>
+
+                <!-- 8. Pack de Reels TiendaDigital -->
+                <div class="portfolio-item reveal" data-category="video">
+                    <div class="p-bg" style="background:linear-gradient(135deg,#C850C0 0%,#E84393 50%,#FD79A8 100%);">
+                        <div class="portfolio-mockup mockup-triple-phone">
+                            <div class="device-phone ph-left">
+                                <div class="phone-notch"></div>
+                                <div class="phone-screen">
+                                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=700&fit=crop&q=80" alt="Reel Moda 1" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="device-phone ph-center">
+                                <div class="phone-notch"></div>
+                                <div class="phone-screen">
+                                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=700&fit=crop&q=80" alt="Reel Moda 2" loading="lazy">
+                                </div>
+                                <div class="phone-indicator"></div>
+                            </div>
+                            <div class="device-phone ph-right">
+                                <div class="phone-notch"></div>
+                                <div class="phone-screen">
+                                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=700&fit=crop&q=80" alt="Reel Moda 3" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="result-badge rb-pink pos-tr"><i class="fas fa-heart"></i> +100K Alcance</div>
+                            <div class="result-badge rb-blue pos-bl"><i class="fas fa-share"></i> +5K Compartidos</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h4>Pack de Reels TiendaDigital</h4>
+                        <p>Pack de 10 Reels virales que generaron +100K de alcance orgánico</p>
+                        <div class="portfolio-tags"><span>CapCut</span><span>DaVinci Resolve</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ PRICING ══════════ -->
+    <section id="precios">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Planes que se <span class="gradient-text">adaptan a ti</span></h2>
+                <p>Elige el plan perfecto para tu proyecto</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="glass-card price-card reveal">
+                    <div class="plan-icon">💡</div>
+                    <h3>Plan Básico</h3>
+                    <div class="price gradient-text">$100 <span>USD</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Landing page de 1 página</li>
+                        <li><i class="fas fa-check"></i> Diseño responsive</li>
+                        <li><i class="fas fa-check"></i> Formulario de contacto</li>
+                        <li><i class="fas fa-check"></i> Optimización móvil</li>
+                        <li><i class="fas fa-check"></i> Entrega en 5 días</li>
+                        <li><i class="fas fa-check"></i> 1 revisión incluida</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20me%20interesa%20el%20Plan%20Básico%20de%20$100" target="_blank" class="btn btn-outline">Elegir Plan</a>
+                </div>
+                <div class="glass-card price-card featured reveal">
+                    <div class="popular-badge">⭐ MÁS POPULAR</div>
+                    <div class="plan-icon">⭐</div>
+                    <h3>Plan Profesional</h3>
+                    <div class="price gradient-text">$200 <span>USD</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Sitio web de hasta 5 páginas</li>
+                        <li><i class="fas fa-check"></i> Diseño personalizado premium</li>
+                        <li><i class="fas fa-check"></i> Panel de administración básico</li>
+                        <li><i class="fas fa-check"></i> SEO básico configurado</li>
+                        <li><i class="fas fa-check"></i> Integración con redes sociales</li>
+                        <li><i class="fas fa-check"></i> 1 video promocional incluido</li>
+                        <li><i class="fas fa-check"></i> Entrega en 15 días</li>
+                        <li><i class="fas fa-check"></i> 3 revisiones incluidas</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20me%20interesa%20el%20Plan%20Profesional%20de%20$200" target="_blank" class="btn btn-primary">Elegir Plan</a>
+                </div>
+                <div class="glass-card price-card reveal">
+                    <div class="plan-icon">🏢</div>
+                    <h3>Plan Empresarial</h3>
+                    <div class="price gradient-text">$300 <span>USD</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Sistema web completo a medida</li>
+                        <li><i class="fas fa-check"></i> Diseño premium exclusivo</li>
+                        <li><i class="fas fa-check"></i> Base de datos completa</li>
+                        <li><i class="fas fa-check"></i> Dashboard administrativo</li>
+                        <li><i class="fas fa-check"></i> 3 videos promocionales incluidos</li>
+                        <li><i class="fas fa-check"></i> Soporte técnico por 3 meses</li>
+                        <li><i class="fas fa-check"></i> SEO avanzado</li>
+                        <li><i class="fas fa-check"></i> Hosting y dominio incluido (1 año)</li>
+                        <li><i class="fas fa-check"></i> Entrega en 30 días</li>
+                        <li><i class="fas fa-check"></i> Revisiones ilimitadas</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20me%20interesa%20el%20Plan%20Empresarial%20de%20$300" target="_blank" class="btn btn-outline">Elegir Plan</a>
+                </div>
+            </div>
+            <div class="pricing-custom reveal">
+                <p>¿Necesitas algo personalizado? <a href="https://wa.me/584129126548?text=Hola%2C%20necesito%20un%20plan%20personalizado" target="_blank">Contáctanos por WhatsApp</a> y te creamos un plan a tu medida 💬</p>
+            </div>
+            <div class="video-plans-title reveal">
+                <h3>🎬 Planes de <span class="gradient-text">Edición de Video</span></h3>
+            </div>
+            <div class="pricing-grid">
+                <div class="glass-card price-card reveal">
+                    <div class="plan-icon">🎥</div>
+                    <h3>Video Básico</h3>
+                    <div class="price gradient-text">$30 <span>USD</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Edición de 1 video (hasta 3 min)</li>
+                        <li><i class="fas fa-check"></i> Cortes, transiciones y música</li>
+                        <li><i class="fas fa-check"></i> Subtítulos básicos</li>
+                        <li><i class="fas fa-check"></i> 1 revisión</li>
+                        <li><i class="fas fa-check"></i> Entrega en 3 días</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20me%20interesa%20el%20Video%20Básico%20de%20$30" target="_blank" class="btn btn-outline">Elegir Plan</a>
+                </div>
+                <div class="glass-card price-card featured reveal">
+                    <div class="popular-badge">🔥 MEJOR VALOR</div>
+                    <div class="plan-icon">🎥</div>
+                    <h3>Pack Redes</h3>
+                    <div class="price gradient-text">$75 <span>USD</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 5 Reels/TikToks/Shorts editados</li>
+                        <li><i class="fas fa-check"></i> Efectos y transiciones dinámicas</li>
+                        <li><i class="fas fa-check"></i> Subtítulos animados</li>
+                        <li><i class="fas fa-check"></i> Música y efectos de sonido</li>
+                        <li><i class="fas fa-check"></i> 2 revisiones por video</li>
+                        <li><i class="fas fa-check"></i> Entrega en 7 días</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20me%20interesa%20el%20Pack%20Redes%20de%20$75" target="_blank" class="btn btn-primary">Elegir Plan</a>
+                </div>
+                <div class="glass-card price-card reveal">
+                    <div class="plan-icon">🎥</div>
+                    <h3>Video Premium</h3>
+                    <div class="price gradient-text">$150 <span>USD</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Video promocional completo (hasta 5 min)</li>
+                        <li><i class="fas fa-check"></i> Motion graphics y animaciones</li>
+                        <li><i class="fas fa-check"></i> Corrección de color profesional</li>
+                        <li><i class="fas fa-check"></i> Intro y outro personalizado</li>
+                        <li><i class="fas fa-check"></i> Subtítulos profesionales</li>
+                        <li><i class="fas fa-check"></i> Revisiones ilimitadas</li>
+                        <li><i class="fas fa-check"></i> Entrega en 10 días</li>
+                    </ul>
+                    <a href="https://wa.me/584129126548?text=Hola%2C%20me%20interesa%20el%20Video%20Premium%20de%20$150" target="_blank" class="btn btn-outline">Elegir Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ CONTACT ══════════ -->
+    <section id="contacto" style="background:var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>¿Listo para impulsar tu <span class="gradient-text">proyecto digital</span>?</h2>
+                <p>Escríbenos y te responderemos en menos de 24 horas</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-form reveal">
+                    <div class="glass-card" style="padding:40px;">
+                        <form id="contactForm" novalidate>
+                            <div class="form-group">
+                                <label for="name">Nombre completo *</label>
+                                <input type="text" id="name" placeholder="Tu nombre completo" required>
+                                <div class="error-msg">Por favor, ingresa tu nombre</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo electrónico *</label>
+                                <input type="email" id="email" placeholder="tu@correo.com" required>
+                                <div class="error-msg">Ingresa un correo válido</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="whatsapp">Número de WhatsApp</label>
+                                <input type="tel" id="whatsapp" placeholder="+58 412 1234567">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Tipo de servicio *</label>
+                                <select id="service" required>
+                                    <option value="">Selecciona un servicio</option>
+                                    <option value="Diseño Web">Diseño Web</option>
+                                    <option value="Creación de Página Web">Creación de Página Web</option>
+                                    <option value="Sistema Web">Sistema Web</option>
+                                    <option value="Edición de Video">Edición de Video</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                                <div class="error-msg">Selecciona un servicio</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Presupuesto estimado</label>
+                                <select id="budget">
+                                    <option value="">Selecciona tu presupuesto</option>
+                                    <option value="Menos de $100">Menos de $100</option>
+                                    <option value="$100 - $300">$100 - $300</option>
+                                    <option value="$300 - $500">$300 - $500</option>
+                                    <option value="Más de $500">Más de $500</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensaje *</label>
+                                <textarea id="message" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                                <div class="error-msg">Por favor, escribe un mensaje</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%;text-align:center;font-size:1rem;">Enviar Mensaje 🚀</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="contact-info-items reveal">
+                    <div class="glass-card contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-item-text">
+                            <h4>Correo electrónico</h4>
+                            <a href="mailto:ezequielbenjamin1202@gmail.com" target="_blank">ezequielbenjamin1202@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="glass-card contact-item">
+                        <div class="contact-item-icon" style="background:#25D366;"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-item-text">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/584129126548" target="_blank">+58 412 9126548</a>
+                        </div>
+                    </div>
+                    <div class="glass-card contact-item">
+                        <div class="contact-item-icon" style="background:#0088cc;"><i class="fab fa-telegram-plane"></i></div>
+                        <div class="contact-item-text">
+                            <h4>Telegram</h4>
+                            <a href="https://t.me/+584129126548" target="_blank">+58 412 9126548</a>
+                        </div>
+                    </div>
+                    <div class="glass-card contact-item">
+                        <div class="contact-item-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);"><i class="fab fa-instagram"></i></div>
+                        <div class="contact-item-text">
+                            <h4>Instagram</h4>
+                            <a href="https://instagram.com/ezequielbenjamin1202" target="_blank">@ezequielbenjamin1202</a>
+                        </div>
+                    </div>
+                    <div class="glass-card contact-item">
+                        <div class="contact-item-icon" style="background:#000;"><i class="fab fa-tiktok"></i></div>
+                        <div class="contact-item-text">
+                            <h4>TikTok</h4>
+                            <a href="https://tiktok.com/@ezequielmedina630" target="_blank">@ezequielmedina630</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ FOOTER ══════════ -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#inicio" class="nav-logo" style="font-size:1.5rem;margin-bottom:15px;display:inline-flex;">
+                        <strong>EBMG</strong>&nbsp;<span style="color:var(--accent-blue);">360 Digital</span>
+                    </a>
+                    <p style="margin-top:15px;">Tu éxito digital, nuestra misión 360°. Creamos experiencias digitales que impulsan tu negocio al siguiente nivel.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/ezequielbenjamin1202" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@ezequielmedina630" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://t.me/+584129126548" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://wa.me/584129126548" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Inicio</a></li>
+                        <li><a href="#servicios"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Servicios</a></li>
+                        <li><a href="#portafolio"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Portafolio</a></li>
+                        <li><a href="#precios"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Precios</a></li>
+                        <li><a href="#contacto"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Diseño Web</a></li>
+                        <li><a href="#servicios"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Páginas Web</a></li>
+                        <li><a href="#servicios"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Sistemas Web</a></li>
+                        <li><a href="#servicios"><i class="fas fa-chevron-right" style="font-size:0.7rem;"></i> Edición de Videos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="mailto:ezequielbenjamin1202@gmail.com" target="_blank"><i class="fas fa-envelope" style="font-size:0.8rem;"></i> ezequielbenjamin1202@gmail.com</a></li>
+                        <li><a href="https://wa.me/584129126548" target="_blank"><i class="fab fa-whatsapp" style="font-size:0.8rem;"></i> +58 412 9126548</a></li>
+                        <li><a href="https://instagram.com/ezequielbenjamin1202" target="_blank"><i class="fab fa-instagram" style="font-size:0.8rem;"></i> @ezequielbenjamin1202</a></li>
+                        <li><a href="https://tiktok.com/@ezequielmedina630" target="_blank"><i class="fab fa-tiktok" style="font-size:0.8rem;"></i> @ezequielmedina630</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 EBMG 360 Digital | Todos los derechos reservados | Diseñado con 💜 por Ezequiel Benjamin Medina</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ══════════ FLOATING ══════════ -->
+    <a href="https://wa.me/584129126548?text=Hola%20EBMG%20360%20Digital%2C%20me%20interesa%20sus%20servicios" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">¡Escríbenos!</span>
+    </a>
+    <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- SUCCESS MODAL -->
+    <div class="success-modal" id="successModal">
+        <div class="success-modal-content">
+            <div class="check-icon"><i class="fas fa-check"></i></div>
+            <h3>¡Mensaje Enviado!</h3>
+            <p>Gracias por contactarnos. Te responderemos en menos de 24 horas.</p>
+            <button class="btn btn-primary" onclick="document.getElementById('successModal').classList.remove('show');">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- ══════════ JAVASCRIPT ══════════ -->
+    <script>
+        // PARTICLES CANVAS
+        (function() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            resize();
+            window.addEventListener('resize', resize);
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                }
+                update() {
+                    this.x += this.speedX; this.y += this.speedY;
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.fillStyle = `rgba(0, 102, 255, ${this.opacity})`;
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                }
+            }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.strokeStyle = `rgba(0, 102, 255, ${0.08 * (1 - dist / 120)})`;
+                            ctx.lineWidth = 0.5; ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // TYPEWRITER
+        (function() {
+            const el = document.getElementById('typewriter');
+            const texts = [
+                'Transformamos tus ideas en soluciones digitales 360°',
+                'Diseño Web Profesional y Creativo',
+                'Edición de Videos de Alto Impacto',
+                'Sistemas Web a la Medida de tu Negocio'
+            ];
+            let textIdx = 0, charIdx = 0, deleting = false;
+            function type() {
+                const current = texts[textIdx];
+                if (!deleting) {
+                    el.textContent = current.substring(0, charIdx + 1);
+                    charIdx++;
+                    if (charIdx === current.length) { deleting = true; setTimeout(type, 2000); return; }
+                    setTimeout(type, 60);
+                } else {
+                    el.textContent = current.substring(0, charIdx - 1);
+                    charIdx--;
+                    if (charIdx === 0) { deleting = false; textIdx = (textIdx + 1) % texts.length; setTimeout(type, 500); return; }
+                    setTimeout(type, 30);
+                }
+            }
+            type();
+        })();
+
+        // NAVBAR SCROLL
+        const navbar = document.getElementById('navbar');
+        const scrollTop = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 80);
+            scrollTop.classList.toggle('visible', window.scrollY > 500);
+            const sections = document.querySelectorAll('section[id]');
+            let current = '';
+            sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 150) current = sec.id; });
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+            });
+        });
+        scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // HAMBURGER
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // THEME TOGGLE
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            themeToggle.querySelector('i').className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        });
+
+        // REVEAL ON SCROLL
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ANIMATED COUNTERS
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.dataset.target;
+                    const increment = target / (2000 / 16);
+                    let current = 0;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.textContent = (target === 100 ? target + '%' : '+' + target);
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = (target === 100 ? Math.floor(current) + '%' : '+' + Math.floor(current));
+                        }
+                    }, 16);
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
+
+        // SKILL BARS
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.fill').forEach(bar => { bar.style.width = bar.dataset.width + '%'; });
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        const skillsGrid = document.getElementById('skillsGrid');
+        if (skillsGrid) skillObserver.observe(skillsGrid);
+
+        // PORTFOLIO FILTER
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeIn 0.5s ease forwards';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // FORM VALIDATION
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valid = true;
+            const name = document.getElementById('name');
+            if (!name.value.trim()) { name.closest('.form-group').classList.add('error'); valid = false; } else { name.closest('.form-group').classList.remove('error'); }
+            const email = document.getElementById('email');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { email.closest('.form-group').classList.add('error'); valid = false; } else { email.closest('.form-group').classList.remove('error'); }
+            const service = document.getElementById('service');
+            if (!service.value) { service.closest('.form-group').classList.add('error'); valid = false; } else { service.closest('.form-group').classList.remove('error'); }
+            const message = document.getElementById('message');
+            if (!message.value.trim()) { message.closest('.form-group').classList.add('error'); valid = false; } else { message.closest('.form-group').classList.remove('error'); }
+            if (valid) { document.getElementById('successModal').classList.add('show'); contactForm.reset(); }
+        });
+        document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(el => {
+            el.addEventListener('input', () => el.closest('.form-group').classList.remove('error'));
+            el.addEventListener('change', () => el.closest('.form-group').classList.remove('error'));
+        });
+
+        // RIPPLE EFFECT
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // FADE IN ANIMATION
+        const style = document.createElement('style');
+        style.textContent = '@keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
